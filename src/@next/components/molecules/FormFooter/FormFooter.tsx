@@ -14,12 +14,17 @@ const renderCancelBtn = (cancelBtn?: IButtonProps) =>
     </ButtonLink>
   );
 
-const renderSubmitBtn = (submitBtn: IButtonProps, formId?: string) =>
+const renderSubmitBtn = (
+  submitBtn: IButtonProps,
+  formId?: string,
+  disabled?: boolean
+) =>
   submitBtn && (
     <Button
       {...getBtnAction(submitBtn)}
       type={formId ? "submit" : "button"}
       form={formId}
+      disabled={disabled}
       size="sm"
     >
       {submitBtn.text}
@@ -28,6 +33,7 @@ const renderSubmitBtn = (submitBtn: IButtonProps, formId?: string) =>
 
 export const FormFooter: React.FC<IProps> = ({
   cancelBtn,
+  disabled,
   divider = false,
   formId,
   submitBtn,
@@ -35,7 +41,7 @@ export const FormFooter: React.FC<IProps> = ({
   return (
     <S.Footer divider={divider}>
       {renderCancelBtn(cancelBtn)}
-      {renderSubmitBtn(submitBtn, formId)}
+      {renderSubmitBtn(submitBtn, formId, disabled)}
     </S.Footer>
   );
 };
