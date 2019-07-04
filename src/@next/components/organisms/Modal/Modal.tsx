@@ -2,7 +2,7 @@ import React from "react";
 import * as ReactDOM from "react-dom";
 
 import { Icon } from "@components/atoms";
-import { FormFooter } from "@components/molecules";
+import { FormFooter, Overlay } from "@components/molecules";
 import * as S from "./styles";
 import { IProps } from "./types";
 
@@ -21,7 +21,7 @@ export const Modal: React.FC<IProps> = ({
 }: IProps) => {
   return target && show
     ? ReactDOM.createPortal(
-        <S.Overlay>
+        <Overlay position="center">
           <S.Lightbox>
             <S.Modal>
               <S.Header>
@@ -39,9 +39,8 @@ export const Modal: React.FC<IProps> = ({
               />
             </S.Modal>
           </S.Lightbox>
-        </S.Overlay>,
+        </Overlay>,
         target
       )
     : null;
 };
-// className="modal__cancelBtn"
