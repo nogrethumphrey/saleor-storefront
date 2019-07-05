@@ -1,7 +1,9 @@
+import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 
 import { Overlay } from ".";
+import { Position } from "./types";
 
 const style = {
   padding: "5rem 4rem",
@@ -9,19 +11,41 @@ const style = {
 };
 const Children = () => <div style={style}>Some content</div>;
 
+const portalRoot = document.createElement("div");
+portalRoot.setAttribute("id", "portal-root");
+document.body.appendChild(portalRoot);
+
+const position: Position = "center";
+
+const DEFAULT_PROPS = {
+  children: Children,
+  hide: action("hide"),
+  position,
+  show: true,
+  target: portalRoot,
+};
+
 storiesOf("@components/molecules/Overlay", module)
   .add("Position center", () => (
-    <Overlay position="center" show={true}>
+    <Overlay {...DEFAULT_PROPS}>
       <Children />
     </Overlay>
   ))
-  .add("Position left", () => (
-    <Overlay position="left" show={true}>
-      <Children />
-    </Overlay>
-  ))
-  .add("Position right", () => (
-    <Overlay position="right" show={true}>
-      <Children />
-    </Overlay>
-  ));
+  .add("Position left", () => {
+    const position: Position = "left";
+    const PROPS = { ...DEFAULT_PROPS, position };
+    return (
+      <Overlay {...PROPS}>
+        <Children />
+      </Overlay>
+    );
+  })
+  .add("Position right", () => {
+    const position: Position = "right";
+    const PROPS = { ...DEFAULT_PROPS, position };
+    return (
+      <Overlay {...PROPS}>
+        <Children />
+      </Overlay>
+    );
+  });
