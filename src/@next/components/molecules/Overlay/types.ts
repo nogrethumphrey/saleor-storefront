@@ -8,3 +8,5 @@ export interface IProps {
   show: boolean;
   target?: HTMLElement | null;
 }
+
+export type TransitionState = "entering" | "entered" | "exiting" | "exited";

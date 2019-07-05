@@ -1,13 +1,12 @@
 import { styled } from "@styles";
 import { css, keyframes } from "styled-components";
-import { Position } from "./types";
+import { Position, TransitionState } from "./types";
 
 interface IStyleProps {
   open: boolean;
   position: Position;
-  state: State;
+  state: TransitionState;
 }
-type State = "entering" | "entered" | "exiting" | "exited";
 
 const slideAnimation = (open: boolean, side: "left" | "right") => {
   const initialValue = open ? "-100rem" : 0;
@@ -62,6 +61,7 @@ export const Lightbox = styled.div<IStyleProps>`
     }
   }}
 `;
+Lightbox.displayName = "S.Lightbox";
 
 export const Overlay = styled.div<IStyleProps>`
   display: flex;
@@ -79,3 +79,4 @@ export const Overlay = styled.div<IStyleProps>`
   justify-content: ${({ position }) => justify[position]};
   opacity: ${({ state }) => opacity[state]};
 `;
+Overlay.displayName = "S.Overlay";
