@@ -1,12 +1,24 @@
 import { styled } from "@styles";
+import { css, keyframes } from "styled-components";
 import { Position } from "./types";
 
+interface IStyleProps {
+  open: boolean;
+  position: Position;
+  state: State;
+}
 type State = "entering" | "entered" | "exiting" | "exited";
 
-const justify = {
-  center: "center",
-  left: "flex-start",
-  right: "flex-end",
+const slideAnimation = (open: boolean, side: "left" | "right") => {
+  const initialValue = open ? "-100rem" : 0;
+  const endValue = open ? 0 : "-100rem";
+  return keyframes`
+  from {
+    ${side}: ${initialValue};
+  }
+  to {
+    ${side}: ${endValue};
+  }`;
 };
 
 const opacity = {
@@ -16,46 +28,54 @@ const opacity = {
   exiting: 0,
 };
 
-export const Lightbox = styled.div<{ state: State }>`
+const justify = {
+  center: "center",
+  left: "flex-start",
+  right: "flex-end",
+};
+const lightboxWidth = {
+  center: "auto",
+  left: "100%",
+  right: "100%",
+};
+
+const lightboxHeight = (width: number) => ({
+  center: `${width}px`,
+  left: "auto",
+  right: "auto",
+});
+
+export const Lightbox = styled.div<IStyleProps>`
+  position: relative;
+  width: ${({ position, theme: { modal } }) =>
+    lightboxHeight(modal.modalWidth)[position]};
   min-height: ${props => props.theme.modal.modalMinHeight}px;
+  height: ${({ position }) => lightboxWidth[position]};
   background-color: ${props => props.theme.colors.white};
+  ${({ open, position }) => {
+    if (position === "left" || position === "right") {
+      return css`
+        ${position}: -100rem;
+        animation: ${slideAnimation(open, position)} 0.4s both;
+        animation-delay: ${({ open }) => (open ? ".5s" : 0)};
+      `;
+    }
+  }}
 `;
 
-export const Overlay = styled.div<{ position: Position; state: State }>`
+export const Overlay = styled.div<IStyleProps>`
   display: flex;
+  position: fixed;
   overflow-y: auto;
-  background-color: ${props => props.theme.colors.overlay};
+  width: 100%;
   height: 100%;
   min-height: 100vh;
-  position: fixed;
   top: 0;
-  transition: opacity 0.3s ease;
-  width: 100%;
   z-index: 2;
+  transition: opacity 0.2s ease;
+  transition-delay: ${({ open }) => (open ? 0 : ".4s")};
+  background-color: ${props => props.theme.colors.overlay};
   align-items: center;
-  opacity: ${({ state }) => opacity[state]}
   justify-content: ${({ position }) => justify[position]};
-  ${Lightbox} {
-    height: ${({ position }) => (position === "center" ? "auto" : "100%")};
-    width: ${({ position, theme: { modal } }) =>
-      position === "center" ? `${modal.modalWidth}px` : "auto"};
-  }
+  opacity: ${({ state }) => opacity[state]};
 `;
-
-// @keyframes sidenavLeftOpen {
-//   from {
-//     left: -100rem;
-//   }
-//   to {
-//     left: 0;
-//   }
-// }
-
-// @keyframes sidenavRightOpen {
-//   from {
-//     right: -100rem;
-//   }
-//   to {
-//     right: 0;
-//   }
-// }

@@ -11,6 +11,7 @@ describe("<Overlay />", () => {
 
   const DEFAULT_PROPS = {
     children: Children,
+    hide: jest.fn(),
     position,
     show: true,
   };

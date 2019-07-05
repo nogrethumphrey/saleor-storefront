@@ -1,16 +1,6 @@
-import { media, styled } from "@styles";
+import { styled } from "@styles";
 
 const horizontalPadding = "2rem";
-
-export const Lightbox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: ${props => props.theme.modal.modalWidth}px;
-  height: auto;
-  min-height: ${props => props.theme.modal.modalMinHeight}px;
-  margin: 0 auto;
-  background-color: ${props => props.theme.colors.white};
-`;
 
 export const Modal = styled.div`
   display: flex;
@@ -48,22 +38,3 @@ export const CloseBtn = styled.button``;
 //           text-transform: uppercase;
 //         }
 //       }
-//       &__close {
-//         $height: 19px;
-
-//         div,
-//         svg {
-//           height: $height;
-//           width: $height;
-//         }
-//       }
-
-//       &__close,
-//       &__action {
-//         &:hover {
-//           cursor: pointer;
-//         }
-//       }
-//     }
-//   }
-// }

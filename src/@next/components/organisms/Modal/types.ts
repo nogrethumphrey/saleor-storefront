@@ -1,5 +1,4 @@
 export interface IProps {
-  target?: HTMLElement | null;
   title: string;
   hide: () => void;
   cancelBtnText: string;
