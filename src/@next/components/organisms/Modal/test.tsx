@@ -1,14 +1,29 @@
-// import { shallow } from "enzyme";
-// import "jest-styled-components";
-// import React from "react";
+import { shallow } from "enzyme";
+import "jest-styled-components";
+import React from "react";
 
-// import { Modal } from ".";
+import { Modal } from ".";
 
-// describe("<Modal />", () => {
-//   // Example test
-//   it("exists", () => {
-//     const wrapper = shallow(<Modal />);
+const Children = () => <div>Content</div>;
+const PROPS = {
+  cancelBtnText: "Cancel",
+  children: Children,
+  formId: "form-id",
+  hide: jest.fn(),
+  loading: false,
+  show: true,
+  submitBtnText: "Save",
+  title: "Modal title",
+};
 
-//     expect(wrapper.exists()).toEqual(true);
-//   });
-// });
+describe("<Modal />", () => {
+  it("exists", () => {
+    const wrapper = shallow(
+      <Modal {...PROPS}>
+        <Children />
+      </Modal>
+    );
+
+    expect(wrapper.exists()).toEqual(true);
+  });
+});
