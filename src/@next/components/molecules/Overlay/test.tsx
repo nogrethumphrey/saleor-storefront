@@ -12,6 +12,7 @@ describe("<Overlay />", () => {
   const DEFAULT_PROPS = {
     children: Children,
     position,
+    show: true,
   };
 
   const renderOverlay = (props: IProps) =>

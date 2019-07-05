@@ -19,9 +19,9 @@ export const Modal: React.FC<IProps> = ({
   show,
   title,
 }: IProps) => {
-  return target && show
+  return target
     ? ReactDOM.createPortal(
-        <Overlay position="center">
+        <Overlay position="center" show={show}>
           <S.Lightbox>
             <S.Modal>
               <S.Header>
