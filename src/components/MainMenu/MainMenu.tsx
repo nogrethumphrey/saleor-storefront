@@ -82,13 +82,7 @@ const MainMenu: React.FC = () => (
             }}
           </TypedMainMenuQuery>
         </div>
-
-        <div className="main-menu__center">
-          <Link to={baseUrl}>
-            <ReactSVG path={logoImg} />
-          </Link>
-        </div>
-
+        
         <div className="main-menu__right">
           <ul>
             <Online>

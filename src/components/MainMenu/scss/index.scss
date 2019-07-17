@@ -11,10 +11,10 @@
   position: relative;
 
   &__left {
-    flex-basis: calc(50% - 2rem);
+    flex-basis: calc(50%);
 
     @media (min-width: $small-screen) {
-      flex-basis: calc(50% - 4rem);
+      flex-basis: calc(50%);
     }
 
     ul {
@@ -25,28 +25,16 @@
   }
 
   &__right {
-    flex-basis: calc(50% - 2rem);
+    flex-basis: calc(50%);
 
     @media (min-width: $small-screen) {
-      flex-basis: calc(50% - 4rem);
+      flex-basis: calc(50%);
     }
 
     ul {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-    }
-  }
-
-  &__center {
-    align-self: center;
-
-    svg {
-      width: 4rem;
-
-      @media (min-width: $small-screen) {
-        width: 6rem;
-      }
     }
   }
 
