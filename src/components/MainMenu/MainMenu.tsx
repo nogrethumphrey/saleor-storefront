@@ -86,62 +86,57 @@ const MainMenu: React.FC = () => (
         <div className="main-menu__right">
           <ul>
             <Online>
-              <Media
-                query={{ minWidth: smallScreen }}
-                render={() => (
-                  <UserContext.Consumer>
-                    {({ logout, user }) =>
-                      user ? (
-                        <MenuDropdown
-                          head={
-                            <li className="main-menu__icon main-menu__user--active">
-                              <ReactSVG path={userImg} />
+                <UserContext.Consumer>
+                  {({ logout, user }) =>
+                    user ? (
+                      <MenuDropdown
+                        head={
+                          <li className="main-menu__icon main-menu__user--active">
+                            <ReactSVG path={userImg} />
+                          </li>
+                        }
+                        content={
+                          <ul className="main-menu__dropdown">
+                            <li>
+                              <Link to="/my-account">
+                                <Trans id="My Account" />
+                              </Link>
                             </li>
-                          }
-                          content={
-                            <ul className="main-menu__dropdown">
-                              <li>
-                                <Link to="/my-account">
-                                  <Trans id="My Account" />
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/order-history">
-                                  <Trans id="Order history" />
-                                </Link>
-                              </li>
-                              <li>
-                                <Link to="/address-book"><Trans id="Address book" /></Link>
-                              </li>
-                              <li>
-                                <Link to="/payment-options">
-                                  Payment options
-                                </Link>
-                              </li>
-                              <li onClick={logout} data-testid="logout-link">
-                                Log Out
-                              </li>
-                            </ul>
-                          }
-                        />
-                      ) : (
-                        <li
-                          data-testid="login-btn"
-                          className="main-menu__icon"
-                          onClick={() =>
-                            overlayContext.show(
-                              OverlayType.login,
-                              OverlayTheme.right
-                            )
-                          }
-                        >
-                          <ReactSVG path={userImg} />
-                        </li>
-                      )
-                    }
-                  </UserContext.Consumer>
-                )}
-              />
+                            <li>
+                              <Link to="/order-history">
+                                <Trans id="Order history" />
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/address-book"><Trans id="Address book" /></Link>
+                            </li>
+                            <li>
+                              <Link to="/payment-options">
+                                Payment options
+                              </Link>
+                            </li>
+                            <li onClick={logout} data-testid="logout-link">
+                              Log Out
+                            </li>
+                          </ul>
+                        }
+                      />
+                    ) : (
+                      <li
+                        data-testid="login-btn"
+                        className="main-menu__icon"
+                        onClick={() =>
+                          overlayContext.show(
+                            OverlayType.login,
+                            OverlayTheme.right
+                          )
+                        }
+                      >
+                        <ReactSVG path={userImg} />
+                      </li>
+                    )
+                  }
+                </UserContext.Consumer>
               <CartContext.Consumer>
                 {cart => (
                   <li
